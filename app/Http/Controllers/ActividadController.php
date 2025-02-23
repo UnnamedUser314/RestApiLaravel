@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Actividad;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class ActividadController extends Controller
@@ -29,12 +30,18 @@ class ActividadController extends Controller
     }
 
 
-    public function associateCategoria(Request $request, $actividadId, $categoriaId)
+    public function associateCategoria($actividadId, $categoriaId)
     {
         $actividad = Actividad::findOrFail($actividadId);
         $categoria = Categoria::findOrFail($categoriaId);
-        $actividad->categorias()->attach($categoriaId);
-        return response()->json(['message' => 'Category associated with activity successfully.']);
+
+        // Avoid duplicate association
+        if (!$actividad->categorias()->where('categoria_id', $categoriaId)->exists()) {
+            $actividad->categorias()->attach($categoriaId);
+            return response()->json(['message' => 'Category associated successfully.']);
+        } else {
+            return response()->json(['message' => 'Category already associated.'], 409);
+        }
     }
 
 

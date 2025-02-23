@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pertence', function (Blueprint $table) {
             $table->foreignId('actividad_id')->constrained('actividades')->onDelete('cascade');
             $table->foreignId('categoria_id')->constrained('categorias')->onDelete('cascade');
-            $table->primary(['actividad_id', 'categoria_id']);
+            $table->unique(['actividad_id', 'categoria_id']); 
         });
     }
 

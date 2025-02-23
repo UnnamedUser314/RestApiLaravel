@@ -12,11 +12,11 @@ class Categoria extends Model
 
     protected $fillable = [
         'nombre',
-        'descripcion'
+        'descripcion',
     ];
 
     public function actividades()
     {
-        return $this->belongsToMany(Actividad::class, 'actividad_pertence');
+        return $this->belongsToMany(Actividad::class, 'actividad_categoria');
     }
 }

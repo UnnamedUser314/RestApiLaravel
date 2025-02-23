@@ -22,7 +22,7 @@ class Actividad extends Model
 
     public function categorias()
     {
-        return $this->belongsToMany(Categoria::class, 'pertence');
+        return $this->belongsToMany(Categoria::class, 'actividad_categoria');
     }
 
     public function alumnos()

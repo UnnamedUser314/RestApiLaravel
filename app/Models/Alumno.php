@@ -13,15 +13,14 @@ class Alumno extends Model
     protected $fillable = [
         'nombre',
         'apellidos',
-        'nombre',
-        'nombre_adulto_responsable',
-        'apellido_adulto_responsable',
-        'email_adulto_responsable',
-        'telefono_adulto_responsable', 
+        'nombre_responsable',
+        'apellido_responsable',
+        'email_responsable',
+        'telefono_responsable', 
     ];
 
     public function actividades()
     {
-        return $this->belongsToMany(Actividad::class, 'solicitud_actividades');
+        return $this->belongsToMany(Actividad::class, 'solicitud');
     }
 }
